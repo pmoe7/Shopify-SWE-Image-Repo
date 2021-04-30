@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% block title %}Upload{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">	
+{% endblock %}
+
+{% block content %}
+
+
+<div class="main">
+  
+
+<div class="container">
+
+  <div class="card"></div>
+  {% for message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{ message[0] }} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{ message[1] }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+
+  <div class="card">
+    <h1 class="title">upload Image</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <div class="input-container">
+        <input type="text" id="title" name="title" required="required"/>
+        <label for="title">Pic Name</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="descr" name="descr" required="required"/>
+        <label for="descr">Description</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="tags" name="tags" required="required"/>
+        <label for="tags">Tags</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <select name="category" id="category" required="required">
+          <option value="" selected disabled hidden>Category</option>
+          <option value="animals">Animals</option>
+          <option value="cars">Cars</option>
+          <option value="sports">Sports</option>
+          <option value="people">People</option>
+          <option value="games">Games</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="input-container">
+        <input type="file" id="img" name="img">
+      </div>
+      <div class="button-container">
+        <button><span>Upload</span></button>
+      </div>
+      <div class="footer"><a href="/">Home</a></div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

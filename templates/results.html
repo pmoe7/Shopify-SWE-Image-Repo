@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% block title %}Search Results{% endblock %}
+
+{% block css %}
+<!--link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">	-->
+{% endblock %}
+
+{% block content %}
+
+
+<div class="s003">
+    <div class="container-fluid">
+        <div class="px-lg-5">
+          <div class="row py-5">
+            <div class="col-lg-12 mx-auto">
+              <div class="text-white p-5 shadow-sm rounded banner bg-color">
+                <h1 class="display-4">Search Results</h1>
+                <p class="lead"><h4>Search Type</h4> {{category}}</p>
+                <p class="lead"><h4>Keyword</h4> {{keyword}}</p>
+                <p class="lead">
+                  <i>Full credit for this front-end design and code: 
+                    <a href="https://bootstrapious.com/snippets" class="text-reset"> Bootstrapious</a></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+      
+          <div class="row">
+              {% for result in results %}
+                <!-- Gallery item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm">
+                        <!--<img src="data:image/png;base64, {{image}}" alt="Img" class="img-fluid card-img-top"/> -->
+                        <img src="{{ url_for('static', filename='uploads/'+ result[6])}}" alt="Img" class="img-fluid card-img-top"/>
+                        
+                        <div class="p-4">
+                            <h5> <a href="#{{result[6]}}" class="text-dark">{{result[1]}}</a></h5>
+                            <p class="small text-muted mb-0"><b>Description:</b> {{result[2]}}</p>
+                            <p class="small text-muted mb-0"><b>Tags:</b> {{result[3]}}</p>
+                            <p class="small text-muted mb-0"><b>Contents:</b> {{result[5]}}</p>
+                            <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                              <p class="small mb-0">
+                                <i class="fa fa-picture-o mr-2"></i>
+                                <span class="font-weight-bold">{{result[4]}}</span>
+                              </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+              {% endfor %}
+
+      
+      
+          </div>
+          <div class="py-5 text-right"><a href="/" class="btn btn-dark px-5 py-3 text-uppercase">Home</a></div>
+        </div>
+      </div>
+      
+
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block title %}MP: Image Repo & Search{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="px-lg-5">
+          <div class="row py-5">
+            <div class="col-lg-12 mx-auto">
+              <div class="text-white p-5 shadow-sm rounded banner">
+                <div class="main">
+                <form method="POST">
+                  <div class="inner-form">
+                    <div class="input-field second-wrap">
+                      <input id="keyword" name="keyword" type="text" placeholder="Enter metadata such as tags, description or contents in image or leave blank to display all" />
+                    </div>
+          
+                    <div class="input-field third-wrap">
+                      <button class="btn-search" >
+                        <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                          <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                        </svg>
+                      </button>
+                    </div>
+          
+                  </div>
+                </form>
+                </div>
+          
+                <p class="lead"><h4>Search Query</h4> {{keyword}}</p>
+                <p class="lead">
+                  <i>Full credit for this front-end design and code: 
+                    <a href="https://bootstrapious.com/snippets" class="text-reset"> Bootstrapious</a></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+      
+          <div class="row">
+              {% for result in results %}
+                <!-- Gallery item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm">
+                        <!--<img src="data:image/png;base64, {{image}}" alt="Img" class="img-fluid card-img-top"/> -->
+                        <a href="{{ url_for('static', filename='uploads/'+ result[6])}}", target="_blank">
+                          <img src="{{ url_for('static', filename='uploads/'+ result[6])}}" alt="Img" class="img-fluid card-img-top"/>
+                        </a>
+                        
+                        <div class="p-4">
+                            <h5> <a href="#{{result[6]}}" class="text-dark">{{result[1]}}</a></h5>
+                            <p class="small text-muted mb-0"><b>Description:</b> {{result[2]}}</p>
+                            <p class="small text-muted mb-0"><b>Tags:</b> {{result[3]}}</p>
+                            <p class="small text-muted mb-0"><b>Contents:</b> {{result[5]}}</p>
+                            <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                              <p class="small mb-0">
+                                <i class="fa fa-picture-o mr-2"></i>
+                                <span class="font-weight-bold">{{result[4]}}</span>
+                              </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+              {% endfor %}
+
+      
+      
+          </div>
+          <div class="py-5 text-right"><a href="/upload" class="btn btn-dark px-5 py-3 text-uppercase">Upload Image</a></div>
+        </div>
+      </div>
+          
+    </div>
+
+{% endblock %}
