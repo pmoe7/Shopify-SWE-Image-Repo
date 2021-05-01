@@ -20,14 +20,15 @@
 
 
 ### LIVE DEMO
-
+The Upload Image functionality is disabled due to the limitations of the Free Tier on PythonAnywhere.
+[Live Demo](http://pmoe7.pythonanywhere.com/)
 
 #### Search Function
 ![Search Function Demo](search.gif)
 
 #### Upload Image
+![Upload Function Demo](upload.gif)
 
 
-The Upload Image functionality is disabled due to the limitations of the Free Tier on PythonAnywhere.
 
-[Live Demo](http://pmoe7.pythonanywhere.com/)
+
