@@ -23,7 +23,7 @@
 
 
 #### Search Function
-
+![Search Function Demo](search.gif)
 
 #### Upload Image
 
