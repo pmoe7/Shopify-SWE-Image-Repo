@@ -29,6 +29,8 @@ The Upload Image functionality is disabled due to the limitations of the Free Ti
 #### Upload Image
 ![Upload Function Demo](upload.gif)
 
+### Thank you for your time and consideration :)
+
 
 
 
