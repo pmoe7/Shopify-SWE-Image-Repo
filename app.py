@@ -1,30 +1,43 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+# app.py
+# Mohammed Perves
+# April 30, 2021
+
+from flask import Flask, render_template, url_for, request, flash
 from werkzeug.utils import secure_filename
 import os
 from object_dection import detect
-from conn import connection
 import mysql.connector
-import io
-import re
 
-UPLOAD_FOLDER = 'static/uploads'
+
+UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+
+host='localhost'
+db = 'shopify'
+user = 'root'
+password = ''
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'super secret key'
 
 
+
+
+#************************************************Index & Search************************************************
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    connection = mysql.connector.connect(host=host, database=db, user=user, password=password)
     results = []
     keyword = ""
     category = "contents"
     cursor = connection.cursor()
     sql = "SELECT * FROM images"
-
     cursor.execute(sql, ())
     results = cursor.fetchall()
+    cursor.close()
 
     if request.method == 'POST':
         req = request.form
@@ -32,10 +45,12 @@ def index():
         category = req.get("category", default="contents")
         #print(category, keyword)
         sql = "SELECT * FROM images WHERE objects LIKE '%' %s '%' OR tags LIKE '%' %s '%' OR descr LIKE '%' %s '%' OR category LIKE '%' %s '%' OR title LIKE '%' %s '%'"
+        cursor = connection.cursor()
         cursor.execute(sql, (keyword, keyword, keyword, keyword, keyword))
         results = cursor.fetchall()
+        cursor.close()
         return render_template('index.html', results=results, category=category, keyword=keyword)
-        
+
     return render_template('index.html', results=results, keyword=keyword)
 
 
@@ -43,12 +58,15 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+
+
+#************************************************Upload Route************************************************
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    msg = ""
+    connection = mysql.connector.connect(host=host, database=db, user=user, password=password)
     if request.method == 'POST':
         req = request.form
-        msg = "File uploaded"
         title = req.get("title")
         descr = req.get("descr")
         tags = req.get("tags")
@@ -64,10 +82,11 @@ def upload():
         if img_file and allowed_file(img_file.filename):
             filename = secure_filename(img_file.filename)
             #print(filename)
-            img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            img_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            img_file.save(img_path)
             #print(title, descr, tags, category)
             
-            objects = detect(filename)
+            objects = detect(img_path)
             objects_str = ','.join(objects)
 
             #print(objects)
@@ -78,6 +97,7 @@ def upload():
                 data = (title, descr, tags, category, objects_str, filename)
                 cursor.execute(sql, data)
                 connection.commit()
+                cursor.close()
                 flash('Image uploaded', 'success')
             except mysql.connector.Error as error:
                 flash('Ooopsie Daisy...There was an error', 'danger')
