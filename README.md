@@ -1,6 +1,6 @@
 # Shopify-SWE-Image-Repo
 ## Mohammed Perves
- Image repo with search function
+ Image repo with search function created in 2 days for the Shopify SWE Fall 2021 Internship
 
 ## Built with
 * Flask
@@ -12,3 +12,12 @@
  * cvlib
  * opencv-python
  * mysql.connector
+
+## Demo
+
+
+### LIVE DEMO
+
+The Upload Image functionality is disabled due to the limitations of the Free Tier on PythonAnywhere.
+
+[Live Demo](http://pmoe7.pythonanywhere.com/)
