@@ -18,6 +18,13 @@
 
 ### LIVE DEMO
 
+
+#### Search Function
+
+
+#### Upload Image
+
+
 The Upload Image functionality is disabled due to the limitations of the Free Tier on PythonAnywhere.
 
 [Live Demo](http://pmoe7.pythonanywhere.com/)
