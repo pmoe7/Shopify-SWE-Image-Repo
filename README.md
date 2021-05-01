@@ -7,7 +7,7 @@
 * MySQL
 * Bootstrap
 
-##Prerequisites
+## Prerequisites
  * Flask
  * cvlib
  * opencv-python
