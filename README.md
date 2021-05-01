@@ -1,8 +1,8 @@
 # Shopify-SWE-Image-Repo
 ## Mohammed Perves
  Image repo created in 2 days for the Shopify SWE Fall 2021 Internship.
- You can upload images to the repo.
- You can also search the repo by metadata such as keywords in the decription of the image, tags or even objects/contents of the images.
+ * You can upload images to the repo.
+ * You can also search the repo by metadata such as keywords in the decription of the image, tags or even objects/contents of the images.
 
 ## Built with
 * Flask
