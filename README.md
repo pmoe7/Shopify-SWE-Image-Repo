@@ -8,6 +8,7 @@
 * Flask
 * MySQL
 * Bootstrap
+* OpenCV
 
 ## Prerequisites
  * Flask
